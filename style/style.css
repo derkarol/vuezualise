@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* CSS Document */
+* {
+  font-family: Lato;
+  box-sizing: border-box;
+  color: black;
+}
+.myCanvas {
+	 margin: 0;
+	 width: 75%; height: 100%;
+	 background-color: cornflowerblue;
+}
+.grid-wrapper {
+	/*max-width: 1000px;*/
+	margin-left: auto;
+	margin-right: auto;
+	flex-wrap: wrap;	
+	display: grid;
+	grid-template-columns:  25% 75%;
+	grid-gap: 0em;
+	justify-content: center;
+	padding: 0.2em;
+	color: #444;		
+	}
+
+.controls {
+	
+	margin-left: 5px;
+	height: 10vh;
+}
