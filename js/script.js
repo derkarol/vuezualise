@@ -16,10 +16,11 @@ function init() {
   var plane = getPlane(50, 50);
   var sphere = getSphere(1);
   sphere.name = 'sphere';
-  getGutter(scene);
+  getVilla(scene);
 
   // add objects to the scene
-  scene.add(sphere);
+  
+  //scene.add(sphere);
   scene.add(plane);
   scene.add(spotLight_01);
   scene.add(spotLight_02);
@@ -39,6 +40,7 @@ function init() {
     spotLight_02.position.z = -10;
 
   plane.rotation.x = Math.PI/2;
+  
   sphere.position.y = sphere.geometry.parameters.radius;
 
   // material adjustments
@@ -65,7 +67,8 @@ function init() {
   sphereMaterial.bumpScale = 0.01;
   sphereMaterial.roughness = 0.75;
   sphereMaterial.metalness = 0.25;
-
+    
+    villaMaterial.colorMaterial = ('rgb(145, 200, 255)', 1);
 
   var renderer = new THREE.WebGLRenderer();
   renderer.shadowMap.enabled = true;
@@ -78,12 +81,16 @@ function init() {
   update(renderer, scene, camera);
 }
 
-function getGutter(scene) {
+function getVilla(scene) {
   var loader = new THREE.JSONLoader();
-  loader.load('models/gutter02.json', function(geometry) {
-      mesh = new THREE.Mesh(geometry);
-      mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
-      mesh.translation = THREE.GeometryUtils.center(geometry);
+  loader.load('models/VVH01.json', function(geo) {
+      mesh = new THREE.Mesh(geo);
+//      mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
+      //mesh.translation = THREE.GeometryUtils.center(geo);
+      var material = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+  });
+      var mesh = new THREE.Mesh(geo, material);
       scene.add(mesh);
   });
 }
