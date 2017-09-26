@@ -1,11 +1,6 @@
 function init() {
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth/window.innerHeight,
-    1,
-    1000
-  );
+  var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 1000);
   var spotLight_01 = getSpotlight('rgb(145, 200, 255)', 1);
   var spotLight_02 = getSpotlight('rgb(255, 220, 180)', 1);
 
@@ -16,7 +11,8 @@ function init() {
   var plane = getPlane(50, 50);
   var sphere = getSphere(1);
   sphere.name = 'sphere';
-  getVilla(scene);
+  
+  var villa = getVilla(scene);
 
   // add objects to the scene
   
@@ -68,7 +64,9 @@ function init() {
   sphereMaterial.roughness = 0.75;
   sphereMaterial.metalness = 0.25;
     
-    villaMaterial.colorMaterial = ('rgb(145, 200, 255)', 1);
+//  var villaMaterial = villa.material;
+//  villMaterial.roughness = 0.65;
+//  villeMaterial.metalness = 0.75;
 
   var renderer = new THREE.WebGLRenderer();
   renderer.shadowMap.enabled = true;
@@ -127,14 +125,19 @@ function getSpotlight(color, intensity) {
 
   return light;
 }
-
+ var control = document.getElementById("length");
+ function darken(){   
+   return control.value;
+    };
 function update(renderer, scene, camera) {
   var spotLight_01 = scene.getObjectByName('spotLight_01');
-  spotLight_01.intensity += (Math.random() - 0.5) * 0.15;
-  spotLight_01.intensity = Math.abs(spotLight_01.intensity);
+  
+      
+  spotLight_01.intensity = (darken() - 1.5) * 0.015;
+  spotLight_01.intensity = spotLight_01.intensity;
 
   var spotLight_02 = scene.getObjectByName('spotLight_02');
-  spotLight_02.intensity += (Math.random() - 0.5) * 0.05;
+  spotLight_02.intensity = (darken() - 1.5) * 0.015;
   spotLight_02.intensity = Math.abs(spotLight_02.intensity);
 
   renderer.render(scene, camera);
@@ -146,5 +149,6 @@ function update(renderer, scene, camera) {
 
 init();
 
+console.log(darken());
 getTexture();
 getBumpMap();

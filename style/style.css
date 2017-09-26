@@ -1,9 +1,10 @@
 @charset "UTF-8";
 /* CSS Document */
 * {
-  font-family: Lato;
+  font-family: "Lato", sans-serif;
   box-sizing: border-box;
-  color: black;
+  color: mediumaquamarine;
+  background-color: black;
 }
 .myCanvas {
 	 margin: 0;
@@ -23,8 +24,8 @@
 	color: #444;		
 	}
 
-.controls {
-	
+.controls {	
+    color: aqua;
 	margin-left: 5px;
 	height: 10vh;
 }
