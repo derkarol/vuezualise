@@ -1,7 +1,9 @@
 @charset "UTF-8";
-/* CSS Document */
+/* SCSS Document */
+$secendFont:"Lato", sans-serif;
+
 * {
-  font-family: "Lato", sans-serif;
+  font-family: $secendFont;
   box-sizing: border-box;
   color: mediumaquamarine;
   background-color: pink;

@@ -1,23 +1,20 @@
-
-let path = require('path');
-let webpack = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // let CleanWebpackPlugin = require('clean-webpack-plugin');
-// let ExtractTextPlugin = new require('extract-text-webpack-plugin');
-// let extractPlugin = new ExtractTextPlugin({
-//   filename: "style.css"
-// });
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let extractPlugin = new ExtractTextPlugin({
+  filename: 'main.css'
+});
+
 module.exports = {
   externals: {
-    'THREE': 'THREE' //THREE is external
+    'THREE': 'THREE' //THREE is external npm run dev
   },
   entry: [
     './src/js/app.js',
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8080'
-  ],
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
   ],
   output: {
     path: path.resolve(__dirname+'/dist'),
@@ -25,21 +22,44 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
-      {test: /\.css$/, loader: "style-loader!css-loader"},
-      {test: /\.js$/, loader: "babel-loader", exclude: /node_modules/, query:{ presets:['es2015']}}
+    rules: [
+      {
+        test: /\.scss$/,
+          use: extractPlugin.extract({
+            // fallbackLoader:'style-loader',
+            use: ['css-loader', 'sass-loader'],
+            publicPath: '/dist'
+        })
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+
+          loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+
+            },
+          query:{
+            presets:['es2015']}
+          }
+        }
     ]
-  }
-  // ,
-  // plugins: [
-  //   new webpack.ProvidePlugin({
-  //     THREE: 'three'
-  //   })
-    // ,
-    // extractPlugin,
-    // new HtmlWebpackPlugin({
-    //   template: './index.html'
-    // }),
-    // new CleanWebpackPlugin(['dist'])
-  // ]
-};
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: '33Dconfigurator',
+      minify: {
+        collapseWhitespace: true
+      }
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    extractPlugin
+    // new ExtractTextPlugin({
+    //   filename: 'style.css',
+    //   disabled: false,
+    //   allChunks: true
+    // })
+  ]
+}

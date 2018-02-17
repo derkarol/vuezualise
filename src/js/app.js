@@ -1,6 +1,6 @@
-require('../css/style.css');
+import '../css/main.scss';
 
-let script = require('./script.js');
+const script = require('./script.js');
 
 if(module.hot) {
   module.hot.accept();
