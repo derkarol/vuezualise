@@ -9,7 +9,7 @@ let extractPlugin = new ExtractTextPlugin({
 
 module.exports = {
   externals: {
-    'THREE': 'THREE' //THREE is external npm run dev
+    'THREE': 'THREE' //THREE is external npm run dev-
   },
   entry: [
     './src/js/app.js',
@@ -39,17 +39,14 @@ module.exports = {
           loader: 'babel-loader',
             options: {
               presets: ['es2015']
-
-            },
-          query:{
-            presets:['es2015']}
+            }
           }
         }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: '33Dconfigurator',
+      title: '3Dconfigurator',
       minify: {
         collapseWhitespace: true
       }

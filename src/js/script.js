@@ -2,6 +2,10 @@ import * as THREE from 'three';
 // import THREE from './three';
 // let THREE = require('three');
 import {extrusion} from './extrusion';
+import {getTexture} from './textures';
+import {getBumpMap} from './bump';
+const WindowResize = require('three-window-resize');
+
 
 function init() {
   const scene = new THREE.Scene();
@@ -104,7 +108,7 @@ function init() {
   document.getElementById('webgl').appendChild(renderer.domElement);
   renderer.setSize(window.innerWidth, window.innerHeight);
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
-  let winResize = new THREEx.WindowResize(renderer, camera);
+  let winResize = new WindowResize(renderer, camera);
   update(renderer, scene, camera);
 
   let check = document.getElementById('length');
